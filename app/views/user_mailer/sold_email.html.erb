@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @user.name %>, your listing has been sold!</h1>
+    <p>
+        Your listing for <%= @card.name %> has been sold!
+    </p>
+    <p><%= @card.qty %> cards were bought by <%= @buyer.name %> for $<%= (@card.price * @card.qty) %></p>
+      Please ship the items to:
+      <%= @buyer.name %><br>
+      <%= @buyer.address %><br>
+    </p>
+    <br>
+    <p>You can contact the buyer on <%= @buyer.email %></p>
+    <p>Thank you for using TCboard!</p>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+<br>
+<h1>Listings for <%= @user_viewed.name %></h1>
+
+<% if @user == @user_viewed %>
+    <br>
+    <%= link_to "Account settings", edit_user_registration_path %>
+    <br>
+<% end %>
+
+<%= render 'cards/cards' %>

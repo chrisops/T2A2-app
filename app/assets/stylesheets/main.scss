@@ -1,0 +1,256 @@
+// Place all the styles related to the main controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+// light theme
+$bg-main-light: rgb(241, 240, 247);
+$bg-nav-light: rgb(212, 211, 223);
+$fc-dark: rgb(49, 49, 49);
+
+// dark theme
+$fc-input-placeholder-light: rgb(69, 74, 79);
+$bg-main-dark: rgb(47, 47, 52);
+$fc-light: rgb(214, 214, 224);
+$fc-light-link: rgb(187, 187, 209);
+$bg-nav-dark: rgb(57, 57, 62);
+$bg-input-dark: rgb(127, 133, 147);
+$fc-nm: rgb(68, 118, 74);
+$fc-lp:rgb(108, 125, 74);
+$fc-mp:rgb(132, 121, 76);
+$fc-hp:rgb(111, 82, 65);
+$heading-light: rgb(85, 132, 189);
+
+p {
+    font-size: 12px;
+    margin: 2px;
+}
+* {
+    color: $fc-dark;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.error {
+    font-size: 20px;
+    color: rgb(224, 161, 136);
+}
+.success {
+    font-size: 20px;
+    color: rgb(173, 216, 158);
+}
+
+nav {
+    ul {
+        li {
+            a{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            font-size: 12px;
+            padding: 0.5rem 0 0.5rem 0;
+            max-width: 30%;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        border-bottom: 1px solid lighten($bg-nav-dark, 6%);
+        margin-top: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    background-color: $bg-nav-light;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#headingnav {
+    max-width: 100%;
+}
+
+.headingtext {
+    font-size: 22px;
+    text-decoration: none;
+    color: $heading-light;
+}
+
+h1 {
+    font-weight: 900;
+}
+
+body {
+    background-color: $bg-main-light;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.h-center, form, .field {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flex-start {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#cards {
+    width: 90%;
+    min-height: 74vh;
+    background-color: $bg-nav-light;
+    flex-wrap: wrap;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 0.4rem;
+    width: 40%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.nm {
+    color: $fc-nm;
+}
+
+.lp {
+    color: $fc-lp;
+}
+
+.mp {
+    color: $fc-mp;
+}
+
+.hp {
+    color: $fc-hp;
+}
+
+.small-text {
+    font-size: 8px;
+}
+
+.field {
+    margin-bottom: 1.5rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    text-align: center;
+}
+
+.field br {
+    display:none;
+}
+
+button:hover {
+    cursor: pointer;
+    
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active
+{
+ -webkit-box-shadow: 0 0 0 30px rgb(189, 187, 196) inset !important;
+ box-shadow: 0 0 0 30px rgb(189, 187, 196) inset !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    
+    a {
+       color: $fc-light-link;
+    }
+    a:hover {
+        color: darken($fc-light-link,7%);
+     }
+
+    body {
+      background-color: $bg-main-dark !important;
+    }
+    #cards {
+        background-color: $bg-nav-dark;
+    }
+
+    * {
+        color: $fc-light;
+    }
+
+    nav {
+        background-color: $bg-nav-dark;
+    }
+
+    button {
+        background-color: $fc-light;
+        color: $fc-dark;
+    }
+
+
+    input, input:valid, textarea {
+        background-color: $bg-input-dark;
+        color: $fc-dark;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: $fc-input-placeholder-light;
+        opacity: 1; /* Firefox */
+      }
+      
+      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: $fc-input-placeholder-light;
+      }
+      
+      ::-ms-input-placeholder { /* Microsoft Edge */
+        color: $fc-input-placeholder-light;
+      }
+
+  }
+
+
+@media (min-width: 768px) {
+  
+    /* Tablet */
+    .card {
+        width: 20%;
+    }
+    a {
+        font-size: 20px;
+    }
+    span, p {
+        font-size: 18px;
+    }
+    .small-text {
+        font-size: 12px;
+    }
+    
+  }
+
+  
+@media (min-width: 1281px) {
+  
+    /* Desktop */
+    .card {
+        width: 18%;
+    }
+
+}

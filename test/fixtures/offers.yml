@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  buyer: one
+  seller: one
+  money: 9.99
+  accepted?: false
+  card: one
+
+two:
+  buyer: two
+  seller: two
+  money: 9.99
+  accepted?: false
+  card: two

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tcboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <nav>
+      <ul>
+        <li id="headingnav"><%= link_to "TCboard", root_path, { :class => "headingtext"} %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to current_user.email, user_account_path(current_user) %></li>
+          <li><%= link_to "New listing", new_card_path(current_user.id) %> </li>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Log in", new_user_session_path %></li>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+
+  <div class="h-center">
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+    <% if flash[:errors] %>
+    <p class=<% if flash[:color] %>
+        <%= flash[:color]%>
+      <% else %>
+        "error"
+      <% end %>> <%= flash[:errors] %> </p>
+    <% end %>
+  </div>
+  <main class="h-center">
+    <%= yield %>
+  </main>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<script src="https://js.stripe.com/v3/"></script>
+
+<div class="h-center">
+    <h1> <%= @card.name %> </h1>
+    <br>
+    <% if @card != nil && @card.card_image.attached? %>
+        <%= cl_image_tag @card.card_image.key, crop: :scale, width: 173, cloud_name: 'bdtech' %>
+    <% else %>
+        <img src="http://via.placeholder.com/173x260" alt="placeholder image">
+    <% end %>
+    <br>
+    <p>Condition: <span class="<%= @card.condition.downcase %>"><%= @condition %></span></p>
+    <span><p>Price: $<%= '%.2f' % @card.price %> each &nbsp;&nbsp;&nbsp;&nbsp;Quantity: <%= @card.qty %></p></span>
+    <p>Listed by: <%= link_to @card.user.name,  user_account_path(@card.user.id) %>
+</div>
+<br>
+<% if @card.user == @user %>
+    <div><%= link_to "Edit", edit_card_path(@card) %> | <%= link_to "Delete", @card, method: 'delete', data: {confirm: "Delete #{@card.name}?"} %></div>
+<% else %>
+    <button id="checkout-button">Buy now</button><span>With cash: $<%= '%.2f' % @card.price %></span>
+<% end %>
+<br>
+<br>
+<%= link_to "Back", :back %>
+
+<%# Stripe payment gateway logic %>
+
+<script type="text/javascript">
+
+
+    // Create an instance of the Stripe object with your publishable API key
+    var stripe = Stripe('pk_test_51Iu6sdGQuL01uXfHc9iPJCjUfmiMrjnhcHeYZVyHonpi5qJ4ZCs0ybiPuHdQ3iXrRWwd3ug7DsjuN3qpHCweE5wJ001wx7oTBu');
+    var checkoutButton = document.getElementById('checkout-button');
+
+    checkoutButton.addEventListener('click', function() {
+        <% if !user_signed_in? %>
+            <% session["user_return_to"] = request.url %>
+            location = "<%= new_user_session_path %>"
+        <% end %>
+        <% if @user.address == "" %>
+            <% session["user_return_to"] = request.url %>
+            <% flash.now[:errors] = "You must have an address to buy items" %>
+            location = "<%= edit_user_registration_path %>"
+        <% end %>
+        // Create a new Checkout Session using the server-side endpoint you
+        // created in step 3.
+        const csrfToken = document.querySelector("[name='csrf-token']").content
+        fetch('/cards/<%= @card.id %>/checkout', {
+            method: 'POST',
+            headers: {
+          'Content-Type': 'application/json',
+          "X-CSRF-Token": csrfToken,
+        },
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(session) {
+            return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function(result) {
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, you should display the localized error message to your
+            // customer using `error.message`.
+            if (result.error) {
+            alert(result.error.message);
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+        });
+    });
+</script>
+
+
+
+
+    
